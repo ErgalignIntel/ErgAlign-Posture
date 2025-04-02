@@ -27,8 +27,36 @@
         <a href="ai-coach.html" class="cta-button">Try the AI Posture Coach</a>
     </section>
 
+    <section class="posture-checker">
+        <h2>Check Your Posture with AI</h2>
+        <form id="postureForm" enctype="multipart/form-data">
+            <label for="imageInput">Upload an image of your posture:</label>
+            <input type="file" id="imageInput" accept="image/*" required>
+            <button type="submit">Check Posture</button>
+        </form>
+        <p id="result"></p>
+    </section>
+
     <footer>
         <p>&copy; 2025 ErgAlign. All rights reserved.</p>
     </footer>
+
+    <script>
+    document.getElementById("postureForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        let formData = new FormData();
+        formData.append("image", document.getElementById("imageInput").files[0]);
+
+        // Replace with your actual Webhook URL from n8n
+        let response = await fetch("https://ergalign.app.n8n.cloud/webhook-test/d7c96e1f-ab06-4c34-9dbe-d642bfb5b056", { 
+            method: "POST", 
+            body: formData 
+        });
+
+        // Get the AI response and display it
+        let result = await response.json();
+        document.getElementById("result").innerText = "AI Feedback: " + result.output;
+    });
+    </script>
 </body>
 </html>
