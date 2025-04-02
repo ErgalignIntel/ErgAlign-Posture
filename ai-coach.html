@@ -24,6 +24,18 @@
     <section class="content">
         <h1>AI Posture Coach</h1>
         <p>Upload a photo and our AI will analyze your posture, providing instant recommendations.</p>
+
+        <!-- Posture Checker Form -->
+        <div class="posture-form">
+            <p><strong>How to Stand:</strong> Stand straight with your back facing the camera, shoulders relaxed, and head in a neutral position.</p>
+            
+            <form id="posture-form" action="YOUR_WEBHOOK_URL" method="POST" enctype="multipart/form-data">
+                <label for="photo-upload">Upload a photo:</label>
+                <input type="file" id="photo-upload" name="photo" accept="image/*" required>
+
+                <button type="submit" id="check-posture-btn">Check Posture</button>
+            </form>
+        </div>
     </section>
 
     <footer>
