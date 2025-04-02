@@ -1,45 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Posture Coach</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Posture Coach - ErgAlign</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
-    <header>
-        <div class="logo">ErgAlign</div>
-        <nav>
-            <button class="menu-toggle">☰</button>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="ai-coach.html">AI Posture Coach</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Header Section with Navigation -->
+  <header>
+    <div class="logo">ErgAlign</div>
+    <nav>
+      <button class="menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="ai-coach.html" class="active">AI Posture Coach</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Main Content Section for AI Posture Coach -->
-    <section class="content">
-        <h1>AI Posture Coach</h1>
-        <p>Upload a photo and our AI will analyze your posture, providing instant recommendations. Please stand straight with your body facing the camera.</p>
+  <!-- Main Content Section for AI Posture Coach -->
+  <section class="content">
+    <h1>AI Posture Coach</h1>
+    <p>
+      Upload a photo and let our AI analyze your posture to provide personalized recommendations.
+      For best results, please stand straight with your body facing the camera, shoulders relaxed, 
+      and ensure you have good lighting.
+    </p>
 
-        <!-- Posture Upload Form -->
-        <form id="posture-form" action="https://ergalign.app.n8n.cloud/webhook-test/d7c96e1f-ab06-4c34-9dbe-d642bfb5b056" method="POST" enctype="multipart/form-data">
-            <label for="image-upload">Upload Your Posture Image:</label>
-            <input type="file" id="image-upload" name="image" accept="image/*" required>
-            <button type="submit">Check Posture</button>
-        </form>
+    <!-- Posture Upload Form -->
+    <div class="upload-container">
+      <form id="posture-form" action="https://ergalign.app.n8n.cloud/webhook-test/d7c96e1f-ab06-4c34-9dbe-d642bfb5b056" method="POST" enctype="multipart/form-data">
+        <label for="image-upload">Select Image (JPG, PNG):</label>
+        <input type="file" id="image-upload" name="image" accept="image/*" required>
+        <button type="submit" id="check-posture-btn">Check Posture</button>
+      </form>
+    </div>
 
-        <!-- Instructions Section (for better user guidance) -->
-        <p>Make sure you are standing straight with your body facing the camera. The AI will assess your posture and provide insights.</p>
-    </section>
+    <!-- Area to Display AI Feedback -->
+    <div id="result-container">
+      <p id="result"></p>
+    </div>
+  </section>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 ErgAlign. All rights reserved.</p>
-    </footer>
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 ErgAlign. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Form Submission -->
+  <script>
+    document.getElementById("posture-form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      let formData = new FormData();
+      formData.append("image", document.getElementById("image-upload").files[0]);
+
+      try {
+        let response = await fetch("https://ergalign.app.n8n.cloud/webhook-test/d7c96e1f-ab06-4c34-9dbe-d642bfb5b056", { 
+          method: "POST", 
+          body: formData 
+        });
+        let result = await response.json();
+        document.getElementById("result").innerText = "AI Feedback: " + result.output;
+      } catch (error) {
+        document.getElementById("result").innerText = "Error: " + error;
+      }
+    });
+  </script>
 </body>
 </html>
