@@ -21,23 +21,23 @@
         </nav>
     </header>
 
+    <!-- Main Content Section for AI Posture Coach -->
     <section class="content">
         <h1>AI Posture Coach</h1>
-        <p>Upload a photo and our AI will analyze your posture, providing instant recommendations.</p>
+        <p>Upload a photo and our AI will analyze your posture, providing instant recommendations. Please stand straight with your body facing the camera.</p>
 
-        <!-- Posture Checker Form -->
-        <div class="posture-form">
-            <p><strong>How to Stand:</strong> Stand straight with your back facing the camera, shoulders relaxed, and head in a neutral position.</p>
-            
-            <form id="posture-form" action="YOUR_WEBHOOK_URL" method="POST" enctype="multipart/form-data">
-                <label for="photo-upload">Upload a photo:</label>
-                <input type="file" id="photo-upload" name="photo" accept="image/*" required>
+        <!-- Posture Upload Form -->
+        <form id="posture-form" action="https://ergalign.app.n8n.cloud/webhook-test/d7c96e1f-ab06-4c34-9dbe-d642bfb5b056" method="POST" enctype="multipart/form-data">
+            <label for="image-upload">Upload Your Posture Image:</label>
+            <input type="file" id="image-upload" name="image" accept="image/*" required>
+            <button type="submit">Check Posture</button>
+        </form>
 
-                <button type="submit" id="check-posture-btn">Check Posture</button>
-            </form>
-        </div>
+        <!-- Instructions Section (for better user guidance) -->
+        <p>Make sure you are standing straight with your body facing the camera. The AI will assess your posture and provide insights.</p>
     </section>
 
+    <!-- Footer Section -->
     <footer>
         <p>&copy; 2025 ErgAlign. All rights reserved.</p>
     </footer>
